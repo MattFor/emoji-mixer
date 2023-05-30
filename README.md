@@ -1,7 +1,7 @@
 # Installation
 
 ```sh
-npm install pretty-ms
+npm install emoji-mixer
 ```
 
 ## Emoji Mix URL Generator
