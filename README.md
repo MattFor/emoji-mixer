@@ -1,4 +1,10 @@
-# Emoji Mix URL Generator
+# Installation
+
+```sh
+npm install pretty-ms
+```
+
+## Emoji Mix URL Generator
 
 This module is designed to generate URLs for mixed emoji images using Google's Android Emoji Kitchen. It consists of several helper functions, an emoji data object and a list of supported emojis.
 
@@ -17,17 +23,12 @@ This is a JavaScript object where each key is a Unicode representation of an emo
 
 ## Functions
 
-- `toUnicode(input)`  
-  Validates and transforms an input into a Unicode representation.
-- `googleRequestUrlEmojiPart(emoji)`  
-  Transforms an emoji Unicode representation for inclusion in a URL.
-- `googleRequestUrl(emojiMixData)`  
-  Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
-- `getEmojiCombo(leftEmoji, rightEmoji)`  
-  Finds a matching emoji combination from the global emojiData object.
-- `getEmojiMixUrl(leftEmoji, rightEmoji, showCompatible)`  
-  Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the unicode representation of two input emojis.
-- `checkSupported(emoji)`  
+- `toUnicode(input)`Validates and transforms an input into a Unicode representation.
+- `googleRequestUrlEmojiPart(emoji)`Transforms an emoji Unicode representation for inclusion in a URL.
+- `googleRequestUrl(emojiMixData)`Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
+- `getEmojiCombo(leftEmoji, rightEmoji)`Finds a matching emoji combination from the global emojiData object.
+- `getEmojiMixUrl(leftEmoji, rightEmoji, showCompatible)`Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the unicode representation of two input emojis.
+- `checkSupported(emoji)`
   Checks if a given emoji is supported by looking it up in the `emojiData` object. Returns an array of emoji data associated with this emoji if supported; otherwise, it returns null.
 
 ## Usage
@@ -48,3 +49,7 @@ Alternatively you can use the CommonJS syntax:
     console.log(emojiMix.default('🔥', '😃'));
 })();
 ```
+
+## Related
+
+- Inspired by [emoji-kitchen](https://github.com/xsalazar/emoji-kitchen)
