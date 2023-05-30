@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "emoji-regex": "^10.2.1"
+  },
+  "type": "module"
+}
