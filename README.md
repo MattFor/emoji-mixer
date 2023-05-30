@@ -36,7 +36,7 @@ This is a JavaScript object where each key is a Unicode representation of an emo
 Import the main function from the module using ES syntax:
 
 ```javascript
-import getEmojiMixUrl from '<module-path>';
+import getEmojiMixUrl from 'emoji-mixer';
 const emojiMixUrl = getEmojiMixUrl('😀', '🪄');
 console.log(emojiMixUrl);
 ```
