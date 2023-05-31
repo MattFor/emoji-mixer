@@ -36,9 +36,18 @@ This is a JavaScript object where each key is a Unicode representation of an emo
 Import the main function from the module using ES syntax:
 
 ```javascript
-import getEmojiMixUrl from 'emoji-mixer';
-const emojiMixUrl = getEmojiMixUrl('😀', '🪄');
-console.log(emojiMixUrl);
+// getEmojiMixUrl is the main function,
+// while the other helper functions are imported through {}
+import getEmojiMixUrl, {
+  toUnicode, 
+  getEmojiCombo, 
+  checkSupported, 
+  googleRequestUrl, 
+  googleRequestUrlEmojiPart 
+} from 'emoji-mixer';
+
+// Example usage.
+console.log(getEmojiMixUrl('😀', '🪄'));
 ```
 
 Alternatively you can use the CommonJS syntax:
