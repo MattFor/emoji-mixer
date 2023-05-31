@@ -12,6 +12,8 @@
 
 - Updated the `showCompatibility` argument in `getEmojiMixUrl` method to `detailedErrors` to reflect the new error handling enhancements.
 - Added helper functions to the CommonJS usage example.
+- [1.0.33] Improved usage examples.
+- [1.0.33] Renamed `emojiData` object into `emojiCompatibilityData`.
 
 ### Fixed
 

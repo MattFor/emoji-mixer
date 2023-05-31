@@ -26,10 +26,10 @@ This is a JavaScript object where each key is a Unicode representation of an emo
 - `toUnicode(input)`Validates and transforms an input into a Unicode representation.
 - `googleRequestUrlEmojiPart(emoji)`Transforms an emoji Unicode representation for inclusion in a URL.
 - `googleRequestUrl(emojiMixData)`Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
-- `getEmojiCombo(leftEmoji, rightEmoji)`Finds a matching emoji combination from the global emojiData object.
+- `getEmojiCombo(leftEmoji, rightEmoji)`Finds a matching emoji combination from the global emojiCompatibilityData object.
 - `getEmojiMixUrl(leftEmoji, rightEmoji, showCompatible)`Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the unicode representation of two input emojis.
 - `checkSupported(emoji)`
-  Checks if a given emoji is supported by looking it up in the `emojiData` object. Returns an array of emoji data associated with this emoji if supported; otherwise, it returns null.
+  Checks if a given emoji is supported by looking it up in the `emojiCompatibilityData` object. Returns an array of emoji data associated with this emoji if supported; otherwise, it returns null.
 
 ## Usage
 
@@ -47,12 +47,14 @@ import getEmojiMixUrl, {
 } from 'emoji-mixer';
 
 // Example usage.
-console.log(getEmojiMixUrl('😀', '🪄'));
+console.log(getEmojiMixUrl('🔥', '😃'));
 ```
 
 Alternatively you can use the CommonJS syntax:
 
 ```javascript
+// Code enclosed in an asynchronous IIFE 
+// as await's needed to import ES modules into CommonJS
 (async () => {
     // Main function is found in emojiMix.default.
     const emojiMix = await import('emoji-mixer');

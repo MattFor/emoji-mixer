@@ -2,7 +2,7 @@
 
 /**
  * `Emoji Mix URL Generator` TypeScript Definitions
- * Version 1.0.32
+ * Version 1.0.33
  * 
  * Created by MattFor (Discord: MattFor#9884) on May 30, 2023.
  * Contact: matthew-forester@protonmail.com
@@ -14,15 +14,15 @@
  * 
  * Types:
  * 
- * `EmojiData` - Represents a combination of emojis. It has properties for leftEmoji,
+ * `emojiCompatibilityData` - Represents a combination of emojis. It has properties for leftEmoji,
  * rightEmoji, and the date when the combination was added.
  * 
- * `EmojiDataMap` - A map where each key is a string of emoji Unicode points and each value
- * is an array of `EmojiData`.
+ * `emojiCompatibilityDataMap` - A map where each key is a string of emoji Unicode points and each value
+ * is an array of `emojiCompatibilityData`.
  * 
  * Exported variables:
  * 
- * `emojiData` - A map of Unicode code points to arrays of emoji combinations.
+ * `emojiCompatibilityData` - A map of Unicode code points to arrays of emoji combinations.
  * 
  * `supportedEmojis` - An array of strings, each representing an emoji supported by the application.
  * 
@@ -34,33 +34,33 @@
  * 
  * `toUnicode(input: string): string | undefined` - Validates and transforms an input into a Unicode representation.
  * 
- * `checkSupported(emoji: string): EmojiData[] | null` - Checks if an emoji is supported by looking it up in the `emojiData` object.
+ * `checkSupported(emoji: string): emojiCompatibilityData[] | null` - Checks if an emoji is supported by looking it up in the `emojiCompatibilityData` object.
  * 
- * `googleRequestUrl(emojiMixData: EmojiData): string` - Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
+ * `googleRequestUrl(emojiMixData: emojiCompatibilityData): string` - Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
  * 
- * `getEmojiCombo(leftEmoji: string, rightEmoji: string): EmojiData | undefined` - Finds a matching emoji combination from the `emojiData` object.
+ * `getEmojiCombo(leftEmoji: string, rightEmoji: string): emojiCompatibilityData | undefined` - Finds a matching emoji combination from the `emojiCompatibilityData` object.
  * 
  * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined` - Generates a URL for an emoji mix image.
  */
 declare module 'emoji-mixer' {
-    type EmojiData = {
+    type emojiCompatibilityData = {
         leftEmoji: string;
         rightEmoji: string;
         date: string;
     };
 
-    type EmojiDataMap = {
-        [key: string]: EmojiData[];
+    type emojiCompatibilityDataMap = {
+        [key: string]: emojiCompatibilityData[];
     };
 
-    export const emojiData: EmojiDataMap;
+    export const emojiCompatibilityData: emojiCompatibilityDataMap;
     export const supportedEmojis: string[];
     export const baseUrl: string;
 
     export function googleRequestUrlEmojiPart(emoji: string): string;
     export function toUnicode(input: string): string | undefined;
-    export function checkSupported(emoji: string): EmojiData[] | null;
-    export function googleRequestUrl(emojiMixData: EmojiData): string;
-    export function getEmojiCombo(leftEmoji: string, rightEmoji: string): EmojiData | undefined;
+    export function checkSupported(emoji: string): emojiCompatibilityData[] | null;
+    export function googleRequestUrl(emojiMixData: emojiCompatibilityData): string;
+    export function getEmojiCombo(leftEmoji: string, rightEmoji: string): emojiCompatibilityData | undefined;
     export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined;
 }
