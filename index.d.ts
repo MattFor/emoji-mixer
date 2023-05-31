@@ -2,7 +2,7 @@
 
 /**
  * `Emoji Mix URL Generator` TypeScript Definitions
- * Version 1.0.0
+ * Version 1.0.3
  * 
  * Created by MattFor (Discord: MattFor#9884) on May 30, 2023.
  * Contact: matthew-forester@protonmail.com
@@ -40,7 +40,7 @@
  * 
  * `getEmojiCombo(leftEmoji: string, rightEmoji: string): EmojiData | undefined` - Finds a matching emoji combination from the `emojiData` object.
  * 
- * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, showCompatible?: boolean): string | null | undefined` - Generates a URL for an emoji mix image.
+ * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined` - Generates a URL for an emoji mix image.
  */
 declare module 'emoji-mixer' {
     type EmojiData = {
@@ -62,5 +62,5 @@ declare module 'emoji-mixer' {
     export function checkSupported(emoji: string): EmojiData[] | null;
     export function googleRequestUrl(emojiMixData: EmojiData): string;
     export function getEmojiCombo(leftEmoji: string, rightEmoji: string): EmojiData | undefined;
-    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, showCompatible?: boolean): string | null | undefined;
+    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined;
 }
