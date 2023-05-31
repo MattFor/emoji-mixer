@@ -45,7 +45,18 @@ Alternatively you can use the CommonJS syntax:
 
 ```javascript
 (async () => {
+    // Main function is found in emojiMix.default.
     const emojiMix = await import('emoji-mixer');
+    // Helper functions can be imported this way.
+    const { 
+      toUnicode, 
+      getEmojiCombo, 
+      checkSupported, 
+      googleRequestUrl, 
+      googleRequestUrlEmojiPart 
+    } = emojiMixer;
+
+    // Example usage.
     console.log(emojiMix.default('🔥', '😃'));
 })();
 ```

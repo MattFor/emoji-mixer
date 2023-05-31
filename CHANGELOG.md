@@ -15,6 +15,7 @@
 ### Fixed
 
 - Added missing semicolons throughout the codebase to improve code quality and consistency.
+- [1.0.31] (Actually) Added helper functions to the CommonJS example usage.
 
 ## [1.0.2] - 2023-05-30
 
