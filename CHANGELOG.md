@@ -4,18 +4,19 @@
 
 ### Changed
 
-- Some outdated emojis to fit the current unicode standard [Where the `-FE0F` flag is not necessary]
+- Some outdated emojis to fit the current unicode standard. [Where the `-FE0F` flag is not necessary]
+- [1.051/52] Small fixes & code style improvements.
 
 ### Upgraded
 
-- Upgraded `toUnicode` to throw an error when an outdate unicode emoji is provided
+- Upgraded `toUnicode` to throw an error when an outdate unicode emoji is provided.
 
 ## [1.0.4] - 2024-02-15 20:00
 
 ### Fixed
 
 - [Issue #1](https://github.com/MattFor/emoji-mixer/issues/1) (Not working for certain emojis) has been fixed. [Improved RegEx]
-- [1.0.41] Updated the RegEx further
+- [1.0.41] Updated the RegEx further.
 - [1.0.42] Updated `toUnicode` to search through a supported emoji string array to find the closes match.
 
 ## [1.0.3] - 2023-05-18 18:15
@@ -44,8 +45,8 @@
 
 ## [1.0.1] - 2023-05-30
 
-- Fixed minor spelling issues
+- Fixed minor spelling issues.
 
 ## [1.0.0] - 2023-05-30
 
-- Initial commit
+- Initial commit.
