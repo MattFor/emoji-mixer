@@ -1,6 +1,6 @@
 /**
  * `Emoji Mix URL Generator` TypeScript Definitions
- * Version 1.0.53
+ * Version 1.0.54
  *
  * Created by MattFor (Discord: MattFor#9884) on May 30, 2023.
  * Contact: matthew-forester@protonmail.com
@@ -30,15 +30,15 @@
  *
  * `googleRequestUrlEmojiPart(emoji: string): string` - Transforms an emoji Unicode representation for inclusion in a URL.
  *
- * `toUnicode(input: string): string | undefined` - Validates and transforms an input into a Unicode representation.
+ * `toUnicode(input: string, oldToNew?: boolean | false): string | undefined | Error` - Validates and transforms an input into a Unicode representation.
  *
- * `checkSupported(emoji: string): emojiCompatibilityData[] | null` - Checks if an emoji is supported by looking it up in the `emojiCompatibilityData` object.
+ * `checkSupported(emoji: string, oldToNew?: boolean | false): emojiCompatibilityData[] | null` - Checks if an emoji is supported by looking it up in the `emojiCompatibilityData` object.
  *
  * `googleRequestUrl(emojiMixData: emojiCompatibilityData): string` - Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
  *
  * `getEmojiCombo(leftEmoji: string, rightEmoji: string): emojiCompatibilityData | undefined` - Finds a matching emoji combination from the `emojiCompatibilityData` object.
  *
- * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined` - Generates a URL for an emoji mix image.
+ * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean, oldToNew?: boolean | false): string | null | undefined` - Generates a URL for an emoji mix image.
  */
 declare module 'emoji-mixer' {
     type emojiCompatibilityData = {
@@ -56,9 +56,9 @@ declare module 'emoji-mixer' {
     export const baseUrl: string;
 
     export function googleRequestUrlEmojiPart(emoji: string): string;
-    export function toUnicode(input: string): string | undefined;
-    export function checkSupported(emoji: string): emojiCompatibilityData[] | null;
     export function googleRequestUrl(emojiMixData: emojiCompatibilityData): string;
+    export function toUnicode(input: string, oldToNew?: boolean | false): string | undefined | Error;
     export function getEmojiCombo(leftEmoji: string, rightEmoji: string): emojiCompatibilityData | undefined;
-    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean): string | null | undefined;
+    export function checkSupported(emoji: string, oldToNew?: boolean | false): emojiCompatibilityData[] | null;
+    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean, oldToNew?: boolean | false): string | null | undefined;
 }
