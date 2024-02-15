@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.5] - 2024-02-15 23:30
+
+### Changed
+
+- Some outdated emojis to fit the current unicode standard [Where the `-FE0F` flag is not necessary]
+
+### Upgraded
+
+- Upgraded `toUnicode` to throw an error when an outdate unicode emoji is provided
+
 ## [1.0.4] - 2024-02-15 20:00
 
 ### Fixed
