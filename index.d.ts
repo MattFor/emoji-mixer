@@ -1,6 +1,6 @@
 /**
  * `Emoji Mix URL Generator` TypeScript Definitions
- * Version 1.0.54
+ * Version 1.0.55
  *
  * Created by MattFor (Discord: MattFor#9884) on May 30, 2023.
  * Contact: matthew-forester@protonmail.com

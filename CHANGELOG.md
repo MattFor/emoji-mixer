@@ -5,7 +5,7 @@
 ### Changed
 
 - Some outdated emojis to fit the current unicode standard. [Where the `-FE0F` flag is not necessary]
-- [1.051/52/53/54] Small fixes & code style improvements.
+- [1.051/52/53/54/55] Small fixes & code style improvements.
 
 ### Upgraded
 
