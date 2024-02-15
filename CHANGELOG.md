@@ -6,6 +6,7 @@
 
 - [Issue #1](https://github.com/MattFor/emoji-mixer/issues/1) (Not working for certain emojis) has been fixed. [Improved RegEx]
 - [1.0.41] Updated the RegEx further
+- [1.0.42] Updated `toUnicode` to search through a supported emoji string array to find the closes match.
 
 ## [1.0.3] - 2023-05-18 18:15
 

@@ -5,7 +5,7 @@
   "type": "module",
   "name": "emoji-mixer",
   "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
