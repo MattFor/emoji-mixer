@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.6] - 2024-02-29 23:30 (Lucky day!)
+
+### Added
+
+- `supportedEmojis`  and `emojiCompatibilityData` to exported things.
+
 ## [1.0.5] - 2024-02-15 23:30
 
 ### Changed
