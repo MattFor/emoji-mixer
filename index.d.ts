@@ -1,11 +1,11 @@
 /**
  * `Emoji Mix URL Generator` TypeScript Definitions
- * Version 1.0.6
+ * Version 1.1.0
  *
  * Created by MattFor (Discord: MattFor#9884) on May 30, 2023.
  * Contact: matthew-forester@protonmail.com
  *
- * Licensed under the MIT License.
+ * Licensed under the MIT Licence.
  *
  * This TypeScript module declaration for the 'emoji-mixer' JavaScript module provides
  * strong type checking for its functions and exported variables.
@@ -40,7 +40,7 @@
  *
  * `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean, oldToNew?: boolean | false): string | null | undefined` - Generates a URL for an emoji mix image.
  */
-declare module 'emoji-mixer' {
+declare module "emoji-mixer" {
     type emojiCompatibilityData = {
         leftEmoji: string;
         rightEmoji: string;
@@ -48,17 +48,18 @@ declare module 'emoji-mixer' {
     };
 
     type emojiCompatibilityDataMap = {
-        [key: string]: emojiCompatibilityData[];
+        [key: string]: emojiCompatibilityData;
     };
 
-    export const emojiCompatibilityData: emojiCompatibilityDataMap;
-    export const supportedEmojis: string[];
     export const baseUrl: string;
+    export const supportedEmojis: string[];
+    export const emojiCompatibilityData: emojiCompatibilityDataMap;
 
     export function googleRequestUrlEmojiPart(emoji: string): string;
     export function googleRequestUrl(emojiMixData: emojiCompatibilityData): string;
     export function toUnicode(input: string, oldToNew?: boolean | false): string | undefined | Error;
     export function getEmojiCombo(leftEmoji: string, rightEmoji: string): emojiCompatibilityData | undefined;
     export function checkSupported(emoji: string, oldToNew?: boolean | false): emojiCompatibilityData[] | null;
-    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean, oldToNew?: boolean | false): string | null | undefined;
+
+    export default function getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors?: boolean, oldToNew?: boolean | false): string | undefined | null;
 }

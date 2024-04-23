@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0] - 2025-04-23 20:00
+
+- Updated the code to my current code style.
+- Moved supportedEmojis and emojiCompatibilityData into their own file: `data.js`.
+- General JSDoc updates.
+- index.d.ts updates.
+
 ## [1.0.6] - 2024-02-29 23:30 (Lucky day!)
 
 ### Added
@@ -15,7 +22,7 @@
 
 ### Upgraded
 
-- Upgraded `toUnicode` to throw an error when an outdate unicode emoji is provided.
+- Upgraded `toUnicode` to throw an error when an outdated unicode emoji is provided.
 
 ## [1.0.4] - 2024-02-15 20:00
 
