@@ -1,6 +1,11 @@
 # Changelog
 
-## [1.1.0] - 2025-04-23 20:00
+## [1.1.01] - 2024-08-03 08:30
+
+- Typo fixes
+- README.md and LICENSE update
+
+## [1.1.0] - 2024-04-23 20:00
 
 - Updated the code to my current code style.
 - Moved supportedEmojis and emojiCompatibilityData into their own file: `data.js`.

@@ -3,7 +3,7 @@
 ```sh
 npm install emoji-mixer
 ```
-Current version: **1.1.0**
+Current version: **1.1.01**
 
 ## Emoji Mix URL Generator
 
@@ -75,4 +75,5 @@ Alternatively you can use the CommonJS syntax:
 
 ## Attributions
 
+- Created by MattFor | Discord tag: mattfor | [Github](https://github.com/MattFor)
 - Inspired by [emoji-kitchen](https://github.com/xsalazar/emoji-kitchen) [made by Xavier Salazar a.k.a [xsalazar](https://github.com/xsalazar)]
