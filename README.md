@@ -3,7 +3,7 @@
 ```sh
 npm install emoji-mixer
 ```
-Current version: **1.1.01**
+Current version: **1.1.11**
 
 ## Emoji Mix URL Generator
 

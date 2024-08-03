@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.01] - 2024-08-03 08:30
+## [1.1.11] - 2024-08-03 09:00
 
 - Typo fixes
 - README.md and LICENSE update
