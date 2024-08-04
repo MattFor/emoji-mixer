@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.12] - 2024-08-04 07:45
+
+- Removed clutter
+- Added .gitignore
+
 ## [1.1.11] - 2024-08-03 09:00
 
 - Typo fixes
