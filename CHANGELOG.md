@@ -1,14 +1,20 @@
 # Changelog
 
+## [1.2.0] - 2025-04-18 01:30
+
+- Updated compatible emoji list. [100+ more supported emojis]
+- Updated dependencies.
+- Updated contact email.
+
 ## [1.1.12] - 2024-08-04 07:45
 
-- Removed clutter
-- Added .gitignore
+- Removed clutter.
+- Added .gitignore.
 
 ## [1.1.11] - 2024-08-03 09:00
 
 - Typo fixes
-- README.md and LICENSE update
+- README.md and LICENSE update.
 
 ## [1.1.0] - 2024-04-23 20:00
 
@@ -21,7 +27,7 @@
 
 ### Added
 
-- `supportedEmojis`  and `emojiCompatibilityData` to exported things.
+- `supportedEmojis` and `emojiCompatibilityData` to exported things.
 
 ## [1.0.5] - 2024-02-15 23:30
 
