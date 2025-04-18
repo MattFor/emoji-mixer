@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.2] - 2025-04-18 15:10
+
+- Updated minification.
+- Updated emoji compatibility searching.
+
 ## [1.2.1] - 2025-04-18 02:00
 
 - Added minification and automatic compatibility.

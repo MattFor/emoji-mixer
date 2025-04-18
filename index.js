@@ -1,5 +1,5 @@
 /**
- * `Emoji Mix URL Generator` Version 1.2.1
+ * `Emoji Mix URL Generator` Version 1.2.2
  *
  * Created by MattFor (Discord: MattFor#9884 (currently: mattfor)) on May 30, 2023.
  * Contact: mattfor@relaxy.xyz
@@ -33,7 +33,6 @@
 
 import emojiRegex from "emoji-regex";
 import { supportedEmojis, emojiCompatibilityData } from "./data.js";
-
 
 /**
  * The base URL for fetching emoji images from Google's Android Emoji Kitchen.
@@ -131,17 +130,17 @@ const toUnicode = (input, oldToNew = false) => {
  * console.log(isSupported);
  */
 const checkSupported = (emoji, oldToNew = false) => {
-  // Convert the input emoji to its Unicode representation
-  emoji = toUnicode(emoji, oldToNew);
+    // Convert the input emoji to its Unicode representation
+    emoji = toUnicode(emoji, oldToNew);
 
-  // If the conversion was unsuccessful, return null
-  if (!emoji)
-  {
-      return null;
-  }
+    // If the conversion was unsuccessful, return null
+    if (!emoji)
+    {
+        return null;
+    }
 
-  // If the emoji is supported, return its data; otherwise, return null
-  return emojiCompatibilityData[emoji] ?? null;
+    // If the emoji is supported, return its data; otherwise, return null
+    return emojiCompatibilityData[emoji] ?? null;
 }
 
 /**
@@ -199,20 +198,32 @@ const googleRequestUrl = emojiMixData => {
  * let emojiCombo = getEmojiCombo("1f600", "2615");
 */
 const getEmojiCombo = (leftEmoji, rightEmoji) => {
-    // Filter the emojiCompatibilityData for the specified rightEmoji to find matching combinations
-    const matchingEmojis = emojiCompatibilityData[rightEmoji]
-        .filter(emoji =>
-            // Look for combinations where either the leftEmoji matches leftEmoji and the rightEmoji matches rightEmoji
-            // or where the leftEmoji matches rightEmoji and the rightEmoji matches leftEmoji
+    const allCombinations = [];
+
+    // Add combinations involving the left emoji (if the array exists)
+    if (emojiCompatibilityData[leftEmoji])
+    {
+        allCombinations.push(...emojiCompatibilityData[leftEmoji]);
+    }
+
+    // Add combinations involving the right emoji (if the array exists)
+    // Avoid adding duplicates if the combination is stored in both arrays
+    if (emojiCompatibilityData[rightEmoji] && leftEmoji !== rightEmoji) 
+    { // Avoid duplicate check if emojis are the same
+        allCombinations.push(...emojiCompatibilityData[rightEmoji]);
+    }
+
+    // Filter the combined list for the specified pair in either order
+    const matchingEmojis = allCombinations.filter(emoji =>
             (emoji.leftEmoji === leftEmoji && emoji.rightEmoji === rightEmoji) ||
             (emoji.leftEmoji === rightEmoji && emoji.rightEmoji === leftEmoji)
-        ).sort((a, b) => a.date > b.date ? -1 : 1); // Sort the matching combinations by date in descending order
+        ).sort((a, b) => a.date > b.date ? -1 : 1); // Sort by date descending
 
-    // If there's at least one matching combination, return the most recent (first in the sorted list)
-    if (matchingEmojis.length > 0) {
+    if (matchingEmojis.length > 0) 
+    {
         return matchingEmojis[0];
-    }
-    else
+    } 
+    else 
     {
         return undefined;
     }
@@ -242,67 +253,67 @@ const getEmojiCombo = (leftEmoji, rightEmoji) => {
  * console.log(getEmojiMixUrl('🔥', '😃'));
  */
 const getEmojiMixUrl = (leftEmoji, rightEmoji, detailedErrors = false, oldToNew = false) => {
-  leftEmoji = toUnicode(leftEmoji, oldToNew);
-  rightEmoji = toUnicode(rightEmoji, oldToNew);
+    leftEmoji = toUnicode(leftEmoji, oldToNew);
+    rightEmoji = toUnicode(rightEmoji, oldToNew);
 
-  // Left emoji argument is incompatible.
-  if (!leftEmoji && !detailedErrors)
-  {
-      return undefined;
-  }
-  else if (!leftEmoji && detailedErrors)
-  {
-      throw new Error(`${leftEmoji} [leftEmoji] argument is not a valid unicode emoji.`);
-  }
+    // Left emoji argument is incompatible.
+    if (!leftEmoji && !detailedErrors)
+    {
+        return undefined;
+    }
+    else if (!leftEmoji && detailedErrors)
+    {
+        throw new Error(`${leftEmoji} [leftEmoji] argument is not a valid unicode emoji.`);
+    }
 
-  // Right emoji argument is incompatible.
-  if (!rightEmoji && !detailedErrors)
-  {
-      return undefined;
-  }
+    // Right emoji argument is incompatible.
+    if (!rightEmoji && !detailedErrors)
+    {
+        return undefined;
+    }
 
-  if (!rightEmoji && detailedErrors)
-  {
-      throw new Error(`${rightEmoji} [rightEmoji] argument is not a valid unicode emoji.`);
-  }
+    if (!rightEmoji && detailedErrors)
+    {
+        throw new Error(`${rightEmoji} [rightEmoji] argument is not a valid unicode emoji.`);
+    }
 
-  // Left emoji isn't supported by Google Emoji Kitchen
-  if (!supportedEmojis.includes(leftEmoji) && !detailedErrors)
-  {
-      return undefined;
-  }
-  else if (!supportedEmojis.includes(leftEmoji) && detailedErrors)
-  {
-      throw new Error(`${leftEmoji} [leftEmoji] argument is not a supported emoji.`);
-  }
+    // Left emoji isn't supported by Google Emoji Kitchen
+    if (!supportedEmojis.includes(leftEmoji) && !detailedErrors)
+    {
+        return undefined;
+    }
+    else if (!supportedEmojis.includes(leftEmoji) && detailedErrors)
+    {
+        throw new Error(`${leftEmoji} [leftEmoji] argument is not a supported emoji.`);
+    }
 
-  // Right emoji isn't supported by Google Emoji Kitchen
-  if (!supportedEmojis.includes(rightEmoji) && !detailedErrors)
-  {
-      return undefined;
-  }
-  else if (!supportedEmojis.includes(rightEmoji) && detailedErrors)
-  {
-      throw new Error(`${rightEmoji} [rightEmoji] argument is not a supported emoji.`);
-  }
+    // Right emoji isn't supported by Google Emoji Kitchen
+    if (!supportedEmojis.includes(rightEmoji) && !detailedErrors)
+    {
+        return undefined;
+    }
+    else if (!supportedEmojis.includes(rightEmoji) && detailedErrors)
+    {
+        throw new Error(`${rightEmoji} [rightEmoji] argument is not a supported emoji.`);
+    }
 
-  const emojiMixData = getEmojiCombo(leftEmoji, rightEmoji);
+    const emojiMixData = getEmojiCombo(leftEmoji, rightEmoji);
 
-  // This emoji combination isn't supported by Google Emoji Kitchen
-  if (emojiMixData === undefined && !detailedErrors)
-  {
-      return undefined;
-  }
-  else if (emojiMixData === undefined && detailedErrors)
-  {
-      throw new Error(`'${leftEmoji}' is not compatible with '${rightEmoji}'. Here are all emojis compatible with '${rightEmoji}':\n[${
-          emojiCompatibilityData[rightEmoji].map(e => {
-              return e.leftEmoji
-          }).join(", ")
-      }]`);
-  }
+    // This emoji combination isn't supported by Google Emoji Kitchen
+    if (emojiMixData === undefined && !detailedErrors)
+    {
+        return undefined;
+    }
+    else if (emojiMixData === undefined && detailedErrors)
+    {
+        throw new Error(`'${leftEmoji}' is not compatible with '${rightEmoji}'. Here are all emojis compatible with '${rightEmoji}':\n[${
+            emojiCompatibilityData[rightEmoji].map(e => {
+                return e.leftEmoji
+            }).join(", ")
+        }]`);
+    }
 
-  return googleRequestUrl(emojiMixData) ?? null;
+    return googleRequestUrl(emojiMixData) ?? null;
 }
 
 /**

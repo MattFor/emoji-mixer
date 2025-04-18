@@ -1,20 +1,25 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
-module.exports = {
+module.exports = 
+{
   mode: "production",
   entry: "./index.js",
-  output: {
+  output: 
+  {
     filename: "index.mjs",
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "module"
   },
-  experiments: {
-    outputModule: true,
+  experiments: 
+  {
+    outputModule: true
   },
-  optimization: {
-    minimizer: [
+  optimization: 
+  {
+    minimizer: 
+    [
       new TerserPlugin({})
-    ],
+    ]
   }
 };
