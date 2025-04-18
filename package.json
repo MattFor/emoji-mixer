@@ -1,12 +1,37 @@
 {
+  "name": "emoji-mixer",
+  "version": "1.2.0",
+  "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "webpack --config webpack.cjs.config.cjs",
+    "build:esm": "webpack --config webpack.esm.config.cjs",
+    "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^5.1.4"
+  },
   "dependencies": {
     "emoji-regex": "^10.2.1"
   },
-  "type": "module",
-  "name": "emoji-mixer",
-  "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
-  "version": "1.2.0",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MattFor/emoji-mixer.git"

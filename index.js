@@ -1,5 +1,5 @@
 /**
- * `Emoji Mix URL Generator` Version 1.2.0
+ * `Emoji Mix URL Generator` Version 1.2.1
  *
  * Created by MattFor (Discord: MattFor#9884 (currently: mattfor)) on May 30, 2023.
  * Contact: mattfor@relaxy.xyz

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.1] - 2025-04-18 02:00
+
+- Added minification and automatic compatibility.
+- Removed files unneeded for distribution.
+
 ## [1.2.0] - 2025-04-18 01:30
 
 - Updated compatible emoji list. [100+ more supported emojis]

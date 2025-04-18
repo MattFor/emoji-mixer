@@ -1,3 +1,6 @@
-.idea/
-.github/
+.idea
+.dist
+.github
 qodana.yaml
+node_modules
+package-lock.json
