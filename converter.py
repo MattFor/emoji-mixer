@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Emoji Mix URL Generator Version 1.3.0
+Emoji Mix URL Generator Version 1.3.1
 
 Created by MattFor (Discord: MattFor#9884 (currently: mattfor)).
 Contact: mattfor@relaxy.xyz

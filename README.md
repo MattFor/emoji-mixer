@@ -4,23 +4,20 @@
 npm install emoji-mixer
 ```
 
-Current version: **1.3.0**
+Current version: **1.3.1**
 
 ## Emoji Mix URL Generator
 
 This module is designed to generate URLs for mixed emoji images using Google's Android Emoji Kitchen.  
-It consists of
-several helper functions, an emoji data object and a list of supported emojis.
+It consists of several helper functions, an emoji data object and a list of supported emojis.
 
 ## Key Components
 
 ### Supported Emojis
 
-This is an array of Unicode code point strings. Each string in the array represents an emoji that is supported by the
-module.  
-For instance, '1fa84' represents the 🪄 emoji, '1f600' represents the 😀 emoji, and so on.
-**To see a full list of supported emojis, visit the `index.js` file.**
-
+`supportedEmojis` is an array of Unicode codepoint strings representing every emoji present in the Emoji Kitchen compatibility database.  
+For instance, '1fa84' represents the 🪄 emoji, '1f600' represents the 😀 emoji, and so on.  
+**To see the complete list of supported emojis, use the exported `supportedEmojis` array.**
 ### Emoji Data
 
 This is a compressed JavaScript object containing Google Emoji Kitchen compatibility data.
@@ -36,6 +33,19 @@ Each emoji key contains an array of compressed compatibility entries:
 [emojiIndex, dateIndex]
 ```
 
+For example:
+
+```js
+{
+    "$e": ["2615", "2648"],
+    "$d": [20201001, 20260128],
+    "2615": [
+        [0, 0],
+        [1, 1]
+    ]
+}
+```
+
 Use `checkSupported()` to retrieve expanded compatibility objects or `getExpandedEmojiCompatibilityData()` to expand the
 entire database.
 
@@ -43,34 +53,38 @@ entire database.
 
 ## Functions
 
-- `toUnicode(input: string, oldToNew: boolean = false)`
-  Validates and transforms an input into a Unicode representation.
+- `toUnicode(input: string, oldToNew: boolean = false)`  
+Validates and transforms an input into a Unicode representation.
 
-- `googleRequestUrlEmojiPart(emoji: string)`
-  Transforms an emoji Unicode representation for inclusion in a URL.
+- `googleRequestUrlEmojiPart(emoji: string)`  
+Transforms an emoji Unicode representation for inclusion in a URL.
 
-- `googleRequestUrl(emojiMixData{})`
-  Generates a URL for fetching an emoji combination image from Google's Android Emoji Kitchen.
+- `googleRequestUrl(emojiMixData{})`  
+Generates a Google Emoji Kitchen image URL from an emoji combination object.
 
-- `getEmojiCombo(leftEmoji: string, rightEmoji: string, preserveInputOrder: boolean = false)`
-  Finds the newest matching Emoji Kitchen combination for two emojis.
+- `getEmojiCombo(leftEmoji: string, rightEmoji: string)`  
+  Finds the newest matching Emoji Kitchen combination for a pair of emojis.  
 
-  By default the result is normalized so that:
-
+  The function searches for compatible combinations in both directions and returns the newest matching entry.  
+  The returned object reflects the combination exactly as it is stored in the Emoji Kitchen compatibility database. 
+  Returns:  
   ```js
-  getEmojiCombo(a, b) === getEmojiCombo(b, a)
+   {
+      leftEmoji: string,
+      rightEmoji: string,
+      date: string
+  }
   ```
+  or `undefined` if no compatible combination exists.
 
-  Pass `true` as the third argument to preserve the original input order.
+- `getExpandedEmojiCompatibilityData(useCache: boolean = false)`  
+  Returns a fully expanded version of the compressed compatibility database.  
+  When `useCache` is enabled, the expanded database is cached and reused on subsequent calls.
 
-- `getExpandedEmojiCompatibilityData(useCache: boolean = false)`
-  Returns a fully expanded version of the compressed compatibility database.
+- `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors: boolean = false, oldToNew: boolean = false)`  
+  Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the Unicode representation of two input emojis.
 
-- `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors: boolean = false, oldToNew: boolean = false)`
-  Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the Unicode representation of two
-  input emojis.
-
-- `checkSupported(emoji: string, oldToNew: boolean = false)`
+- `checkSupported(emoji: string, oldToNew: boolean = false)`  
   Checks whether an emoji is supported.
 
   Returns an array of expanded compatibility objects:

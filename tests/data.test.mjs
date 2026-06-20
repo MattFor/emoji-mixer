@@ -39,11 +39,13 @@ for (const { name, module } of targets)
         emojiCompatibilityData, supportedEmojis,
     } = actualModule;
 
-    test(`[${name}] supported emoji list includes expected entries`, () =>
+    test(`[${name}] supported emoji list includes expected entries and is populated`, () =>
     {
-        assert.ok(supportedEmojis.includes("1fa84"));
-        assert.ok(supportedEmojis.includes("1f444"));
-        assert.ok(supportedEmojis.includes("1f397-fe0f"));
+        assert.ok(supportedEmojis.length > 600);
+
+        assert.ok(supportedEmojis.includes("2615"));    // ☕
+        assert.ok(supportedEmojis.includes("2648"));    // ♈
+        assert.ok(supportedEmojis.includes("1fa84"));   // 🪄
     });
 
     test(`[${name}] compatibility data contains lookup tables`, () =>
@@ -118,6 +120,34 @@ for (const { name, module } of targets)
                 assert.notEqual(emojis[emojiIndex], undefined, `Missing emoji table entry ${emojiIndex}`);
                 assert.notEqual(dates[dateIndex], undefined, `Missing date table entry ${dateIndex}`);
             }
+        }
+    });
+
+    test(`[${name}] every supported emoji exists in compatibility data`, () =>
+    {
+        for (const emoji of supportedEmojis)
+        {
+            assert.notEqual(
+                emojiCompatibilityData[emoji],
+                undefined,
+                `${emoji} missing from compatibility data`
+            );
+        }
+    });
+
+    test(`[${name}] every compatibility key exists in supportedEmojis`, () =>
+    {
+        for (const key of Object.keys(emojiCompatibilityData))
+        {
+            if (key.startsWith("$"))
+            {
+                continue;
+            }
+
+            assert.ok(
+                supportedEmojis.includes(key),
+                `${key} missing from supportedEmojis`
+            );
         }
     });
 }

@@ -1,5 +1,5 @@
 /**
- * `Emoji Mix URL Generator` Version 1.3.0
+ * `Emoji Mix URL Generator` Version 1.3.1
  *
  * Created by MattFor (Discord: MattFor#9884 (currently: mattfor)) on May 30, 2023.
  * Contact: mattfor@relaxy.xyz
@@ -337,27 +337,16 @@ const googleRequestUrl = emojiMixData =>
  * `rightEmoji`) in both possible orders. If multiple matches exist, the
  * newest (most recent date) match is returned.
  *
- * By default, the returned combination is normalized so that:
- *
- * `getEmojiCombo(a, b)` and `getEmojiCombo(b, a)`
- *
- * return the same result. This makes compatibility lookups order-independent.
- *
- * When `preserveInputOrder` is enabled, the returned object preserves the
- * original argument order while still using the newest matching
- * compatibility entry's date.
+ * The returned object reflects the combination exactly as it is stored in
+ * the Emoji Kitchen compatibility database. This is important because
+ * Google Emoji Kitchen image URLs are not always symmetric and may depend
+ * on the stored emoji order.
  *
  * @param {string} leftEmoji
- * The Unicode representation of the left emoji.
+ * The Unicode representation of the first emoji.
  *
  * @param {string} rightEmoji
- * The Unicode representation of the right emoji.
- *
- * @param {boolean} [preserveInputOrder=false]
- * Whether the returned object's `leftEmoji` and `rightEmoji` fields should
- * preserve the order of the input arguments. When `false`, the returned
- * combination is normalized so that argument order does not affect the
- * result.
+ * The Unicode representation of the second emoji.
  *
  * @returns {{
  *     leftEmoji: string,
@@ -376,19 +365,16 @@ const googleRequestUrl = emojiMixData =>
  * // }
  *
  * @example
- * getEmojiCombo("2615", "2648");
- * getEmojiCombo("2648", "2615");
- * // Returns the same object in both cases.
- *
- * @example
- * const combo = getEmojiCombo("2648", "2615", true);
+ * const combo = getEmojiCombo("2648", "2615");
+ * // May return:
  * // {
- * //   leftEmoji: "2648",
- * //   rightEmoji: "2615",
+ * //   leftEmoji: "2615",
+ * //   rightEmoji: "2648",
  * //   date: "20260128"
  * // }
+ * // because the returned combination reflects the stored Emoji Kitchen entry.
  */
-const getEmojiCombo = (leftEmoji, rightEmoji, preserveInputOrder = false) =>
+const getEmojiCombo = (leftEmoji, rightEmoji) =>
 {
     const emojiTable = emojiCompatibilityData.$e;
     const wantedLeft = _getStoredEmojiValue(leftEmoji);
@@ -433,24 +419,8 @@ const getEmojiCombo = (leftEmoji, rightEmoji, preserveInputOrder = false) =>
         search(rightEmoji, wantedLeft);
     }
 
-    const normalizeCombo = combo =>
-    {
-        const [leftEmoji, rightEmoji] = [combo.leftEmoji, combo.rightEmoji].sort();
-
-        return {
-            leftEmoji, rightEmoji, date: combo.date,
-        };
-    };
-
-    if (!newest)
-    {
-        return undefined;
-    }
-
-    return preserveInputOrder ? {
-        leftEmoji, rightEmoji, date: newest.date,
-    } : normalizeCombo(newest);
-}
+    return newest ?? undefined;
+};
 
 /**
  * This function generates a URL for an emoji mix image from Google's Android Emoji Kitchen

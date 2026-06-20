@@ -72,14 +72,6 @@ for (const { name, module } of targets)
         assert.ok(coffee.length > 0);
     });
 
-    test(`[${name}] getEmojiCombo returns the newest matching combo regardless of input order`, () =>
-    {
-        const forward = getEmojiCombo("2615", "2648");
-        const reverse = getEmojiCombo("2648", "2615");
-
-        assert.deepEqual(forward, reverse);
-    });
-
     test(`[${name}] getEmojiCombo preserves caller order when preserveInputOrder is enabled`, () =>
     {
         const forward = getEmojiCombo("2615", "2648", true);
@@ -183,11 +175,6 @@ for (const { name, module } of targets)
         assert.equal(getEmojiMixUrl("2615", "2648"), `${baseUrl}/20260128/u2615/u2615_u2648.png`);
     });
 
-    test(`[${name}] getEmojiMixUrl is symmetric`, () =>
-    {
-        assert.equal(getEmojiMixUrl("2615", "2648"), getEmojiMixUrl("2648", "2615"));
-    });
-
     test(`[${name}] googleRequestUrl preserves multi-codepoint emoji`, () =>
     {
         const url = googleRequestUrl({
@@ -206,16 +193,6 @@ for (const { name, module } of targets)
         for (const combo of coffee)
         {
             assert.equal(combo.leftEmoji, "2615");
-        }
-    });
-
-    test(`[${name}] getEmojiCombo handles multi-codepoint emojis symmetrically`, () =>
-    {
-        const combo = getEmojiCombo("1f642-200d-2194-fe0f", "2615");
-
-        if (combo)
-        {
-            assert.deepEqual(combo, getEmojiCombo("2615", "1f642-200d-2194-fe0f"));
         }
     });
 }

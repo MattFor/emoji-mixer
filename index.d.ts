@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
 /**
- * `Emoji Mix URL Generator` TypeScript Definitions Version 1.3.0
+ * `Emoji Mix URL Generator` TypeScript Definitions Version 1.3.1
  *
  * Created by MattFor (Discord: MattFor#9884 (currently: mattfor)) on May 30, 2023.
  * Contact: mattfor@relaxy.xyz
@@ -53,8 +53,8 @@
  * Generates a URL for fetching an emoji combination image from Google's
  * Android Emoji Kitchen.
  *
- * `getEmojiCombo(leftEmoji: string, rightEmoji: string, preserveInputOrder?: boolean): EmojiCombo | undefined`
- * Finds the newest matching emoji combination.
+ * `getEmojiCombo(leftEmoji: string, rightEmoji: string): EmojiCombo | undefined`
+ * Finds the newest matching Emoji Kitchen combination.
  *
  * `getExpandedEmojiCompatibilityData(useCache?: boolean): ExpandedEmojiCompatibilityData`
  * Returns a fully expanded version of the compatibility database.
@@ -80,7 +80,10 @@ declare module "emoji-mixer" {
     export type CompressedEmojiEntry = [number, number];
 
     /**
-     * Internal compressed Emoji Kitchen compatibility database.
+     * Compressed Emoji Kitchen compatibility database.
+     *
+     * This is the authoritative source of supported emoji and
+     * compatibility information used by the library.
      */
     export interface EmojiCompatibilityData {
         /**
@@ -116,7 +119,7 @@ declare module "emoji-mixer" {
     export const baseUrl: string;
 
     /**
-     * List of all supported emoji Unicode strings.
+     * List of all emoji Unicode strings present in the Emoji Kitchen compatibility database.
      */
     export const supportedEmojis: string[];
 
@@ -153,18 +156,19 @@ declare module "emoji-mixer" {
     /**
      * Finds the newest matching Emoji Kitchen combination.
      *
-     * When `preserveInputOrder` is false (default), the returned
-     * combination is normalized so that:
+     * The function searches for a matching pair of emojis in both
+     * possible orders and returns the newest matching compatibility
+     * entry.
      *
-     * getEmojiCombo(a, b) === getEmojiCombo(b, a)
+     * The returned object reflects the combination exactly as it is
+     * stored in the Emoji Kitchen compatibility database.
      *
-     * When enabled, the returned object preserves the original
-     * argument order.
+     * This is important cause Emoji Kitchen image URLs are not always
+     * symmetric and may depend on the stored emoji order.
      */
     export function getEmojiCombo(
         leftEmoji: string,
-        rightEmoji: string,
-        preserveInputOrder?: boolean
+        rightEmoji: string
     ): EmojiCombo | undefined;
 
     /**

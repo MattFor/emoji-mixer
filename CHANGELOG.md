@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.1] - 2026-06-20 15:15
+
+- Emergency fix so that supportedEmojis uses the same source of truth and isn't hardcoded.
+- Also fixes invalid url creation due to preserved order.
+
 ## [1.3.0] - 2026-06-20 15:00
 
 - Added tests.
