@@ -1,53 +1,55 @@
 {
-  "name": "emoji-mixer",
-  "version": "1.2.2",
-  "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
-  "type": "module",
-  "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "webpack --config webpack.cjs.config.cjs",
-    "build:esm": "webpack --config webpack.esm.config.cjs",
-    "prepublishOnly": "npm run build"
-  },
-  "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs",
-      "default": "./dist/index.js"
-    }
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "files": [
-    "dist",
-    "package.json",
-    "README.md",
-    "LICENSE"
-  ],
-  "devDependencies": {
-    "terser-webpack-plugin": "^5.3.14",
-    "webpack": "^5.99.5",
-    "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "emoji-regex": "^10.2.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MattFor/emoji-mixer.git"
-  },
-  "keywords": [
-    "emoji",
-    "mix",
-    "mixing",
-    "combination",
-    "google",
-    "kitchen"
-  ],
-  "author": "MattFor",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MattFor/emoji-mixer/issues"
-  },
-  "homepage": "https://github.com/MattFor/emoji-mixer#readme"
+    "name": "emoji-mixer",
+    "version": "1.3",
+    "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
+    "type": "module",
+    "scripts": {
+        "build": "npm run build:cjs && npm run build:esm",
+        "build:cjs": "webpack --config webpack.cjs.config.cjs",
+        "build:esm": "webpack --config webpack.esm.config.cjs",
+        "test": "node --test tests/*",
+        "prepublishOnly": "npm run build"
+    },
+    "exports": {
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.mjs",
+            "default": "./dist/index.js"
+        }
+    },
+    "main": "dist/index.cjs",
+    "module": "dist/index.mjs",
+    "files": [
+        "dist",
+        "package.json",
+        "README.md",
+        "LICENSE"
+    ],
+    "devDependencies": {
+        "terser-webpack-plugin": "^5.3.14",
+        "webpack": "5.104.1",
+        "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "emoji-regex": "^10.2.1",
+        "stream-json": "^3.4.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MattFor/emoji-mixer.git"
+    },
+    "keywords": [
+        "emoji",
+        "mix",
+        "mixing",
+        "combination",
+        "google",
+        "kitchen"
+    ],
+    "author": "MattFor",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/MattFor/emoji-mixer/issues"
+    },
+    "homepage": "https://github.com/MattFor/emoji-mixer#readme"
 }

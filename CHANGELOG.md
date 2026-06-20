@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.3] - 2026-06-20 15:00
+
+- Added tests.
+- Added automatic metadata downloader/converter.
+- Updated compatible emoji list.
+- Significantly reduced file sizes with smarter emojiCompatibilityData compression.
+- Improved TypeScript definitions.
+- Added expanded compatibility helpers.
+- Added compatibility data caching support.
+- Added support for preserving caller order in `getEmojiCombo()`.
+- Improved documentation and JSDoc coverage.
+- In general this is easier to work on now.
+
+Emoji compatibility is now accessed purely by compressed lookup tables internally (`$e` and `$d`), reducing package size and memory usage while preserving full functionality. The public API remains compatible for most use cases.
+
 ## [1.2.2] - 2025-04-18 15:10
 
 - Updated minification.
@@ -43,12 +58,12 @@
 
 ### Changed
 
-- Some outdated emojis to fit the current unicode standard. [Where the `-FE0F` flag is not necessary]
+- Some outdated emojis to fit the current Unicode standard. [Where the `-FE0F` flag is not necessary]
 - [1.051/52/53/54/55] Small fixes & code style improvements.
 
 ### Upgraded
 
-- Upgraded `toUnicode` to throw an error when an outdated unicode emoji is provided.
+- Upgraded `toUnicode` to throw an error when an outdated Unicode emoji is provided.
 
 ## [1.0.4] - 2024-02-15 20:00
 

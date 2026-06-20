@@ -1,5 +1,6 @@
 dist
 .idea
+.venv
 .github
 qodana.yaml
 node_modules
