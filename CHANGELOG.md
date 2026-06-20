@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.3] - 2026-06-20 15:00
+## [1.3.0] - 2026-06-20 15:00
 
 - Added tests.
 - Added automatic metadata downloader/converter.
