@@ -1,6 +1,6 @@
 {
     "name": "emoji-mixer",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
     "type": "module",
     "exports": {
