@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.0.0] - 20:30 CEST 26-10-2026
+
+### Fixed
+
+- About half of all generated URLs were 404s since 1.3.0 (OOPS!), because the data lost which emoji goes on the left. Combinations now always use Google's order.
+- `toUnicode` read only the first character: 😮‍💨, 🙂‍↔️, 🙂‍↕️, 😶‍🌫️ and ❤️‍🩹 resolved to a different emoji, and input like `"1f6"` or `"😀😀"` was accepted.
+- `getEmojiMixUrl` threw on unsupported input even without `detailedErrors`.
+- TypeScript types were not included in the published package - oops!
+
+### Changed (this might break your stuff!)
+
+- Rewritten in TypeScript. ESM only; `require()` still works on Node.js 20.19+.
+- Removed the `oldToNew` parameter.
+- `toUnicode` returns `undefined` instead of throwing.
+- `getEmojiMixUrl` never returns `null`.
+- `checkSupported` and `getEmojiCombo` return Google's emoji order, so the queried emoji can be `rightEmoji`.
+- In `emojiCompatibilityData`, a negative `emojiIndex` marks the key as the right-hand emoji.
+
+### Removed
+
+- Dependencies `emoji-regex` and `stream-json`; webpack build; `index.d.ts` (now generated); `converter.py` and `release.sh` (replaced by `converter.ts` and CI).
+
+### Added
+
+- CI tests on Node.js 20, 22 and 24, publishing on `v*` tags, and a weekly data refresh PR.
+
 ## [1.3.1] - 2026-06-20 15:15
 
 - Emergency fix so that supportedEmojis uses the same source of truth and isn't hardcoded.

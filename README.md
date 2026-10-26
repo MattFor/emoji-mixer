@@ -4,137 +4,59 @@
 npm install emoji-mixer
 ```
 
-Current version: **1.3.1**
+Requires Node.js 20.19+.
 
 ## Emoji Mix URL Generator
 
-This module is designed to generate URLs for mixed emoji images using Google's Android Emoji Kitchen.  
-It consists of several helper functions, an emoji data object and a list of supported emojis.
-
-## Key Components
-
-### Supported Emojis
-
-`supportedEmojis` is an array of Unicode codepoint strings representing every emoji present in the Emoji Kitchen compatibility database.  
-For instance, '1fa84' represents the 🪄 emoji, '1f600' represents the 😀 emoji, and so on.  
-**To see the complete list of supported emojis, use the exported `supportedEmojis` array.**
-### Emoji Data
-
-This is a compressed JavaScript object containing Google Emoji Kitchen compatibility data.
-
-The database uses two lookup tables:
-
-- `$e` - Unique emoji Unicode codepoint strings.
-- `$d` - Unique Emoji Kitchen release dates.
-
-Each emoji key contains an array of compressed compatibility entries:
+Get the URL of a Google Emoji Kitchen image for two emojis.
 
 ```js
-[emojiIndex, dateIndex]
+import getEmojiMixUrl from 'emoji-mixer';
+// or: const { default: getEmojiMixUrl } = require("emoji-mixer");
+
+getEmojiMixUrl('🔥', '😃');
+// https://www.gstatic.com/android/keyboard/emojikitchen/20201001/u1f603/u1f603_u1f525.png
 ```
 
-For example:
-
-```js
-{
-    "$e": ["2615", "2648"],
-    "$d": [20201001, 20260128],
-    "2615": [
-        [0, 0],
-        [1, 1]
-    ]
-}
-```
-
-Use `checkSupported()` to retrieve expanded compatibility objects or `getExpandedEmojiCompatibilityData()` to expand the
-entire database.
-
-**To inspect the raw compatibility database, see `compatibility.json`.**
+Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1F600"`, `"2764-fe0f"`). The FE0F variation selector is optional.
 
 ## Functions
 
-- `toUnicode(input: string, oldToNew: boolean = false)`  
-Validates and transforms an input into a Unicode representation.
+- `getEmojiMixUrl(leftEmoji, rightEmoji, detailedErrors = false)` (default export)  
+  Returns the image URL, or `undefined` if an emoji is unsupported or the pair has no mix. With `detailedErrors`, throws an error explaining why instead.
 
-- `googleRequestUrlEmojiPart(emoji: string)`  
-Transforms an emoji Unicode representation for inclusion in a URL.
+- `toUnicode(input)`  
+  Returns the codepoint key of one supported emoji, e.g. `"☕"` → `"2615"`, or `undefined`.
 
-- `googleRequestUrl(emojiMixData{})`  
-Generates a Google Emoji Kitchen image URL from an emoji combination object.
+- `getEmojiCombo(leftEmoji, rightEmoji)`  
+  Takes two codepoint keys and returns the newest `{ leftEmoji, rightEmoji, date }` combination, or `undefined`. `leftEmoji` and `rightEmoji` are in the order Google hosts the image under, which may differ from the argument order.
 
-- `getEmojiCombo(leftEmoji: string, rightEmoji: string)`  
-  Finds the newest matching Emoji Kitchen combination for a pair of emojis.  
+- `checkSupported(emoji)`  
+  Returns every combination containing the emoji (on either side), or `null` if it is unsupported.
 
-  The function searches for compatible combinations in both directions and returns the newest matching entry.  
-  The returned object reflects the combination exactly as it is stored in the Emoji Kitchen compatibility database. 
-  Returns:  
-  ```js
-   {
-      leftEmoji: string,
-      rightEmoji: string,
-      date: string
-  }
-  ```
-  or `undefined` if no compatible combination exists.
+- `googleRequestUrl(combo)` / `googleRequestUrlEmojiPart(emoji)`  
+  Build the image URL from a combination / format one emoji for the URL.
 
-- `getExpandedEmojiCompatibilityData(useCache: boolean = false)`  
-  Returns a fully expanded version of the compressed compatibility database.  
-  When `useCache` is enabled, the expanded database is cached and reused on subsequent calls.
+- `getExpandedEmojiCompatibilityData(useCache = false)`  
+  Returns `{ [emoji]: combination[] }` for every supported emoji.
 
-- `getEmojiMixUrl(leftEmoji: string, rightEmoji: string, detailedErrors: boolean = false, oldToNew: boolean = false)`  
-  Generates a URL for an emoji mix image from Google's Android Emoji Kitchen based on the Unicode representation of two input emojis.
+- `supportedEmojis`, `emojiCompatibilityData`, `baseUrl`  
+  The supported codepoint keys, the compressed database and the image base URL.
 
-- `checkSupported(emoji: string, oldToNew: boolean = false)`  
-  Checks whether an emoji is supported.
+## Data format
 
-  Returns an array of expanded compatibility objects:
+`emojiCompatibilityData` is generated from [emojikitchen.dev](https://emojikitchen.dev/metadata.json) by `converter.ts`:
 
-  ```js
-  {
-      leftEmoji: string,
-      rightEmoji: string,
-      date: string
-  }
-  ```
-
-  or `null` if the emoji is unsupported.
-
-## Usage
-
-Import the main function from the module using ES syntax:
-
-```javascript
-// getEmojiMixUrl is the main function,
-// while the other helper functions are imported through {}
-import getEmojiMixUrl, {
-    toUnicode, getEmojiCombo, checkSupported, googleRequestUrl, googleRequestUrlEmojiPart
-} from 'emoji-mixer';
-
-// Example usage.
-console.log(getEmojiMixUrl('🔥', '😃'));
-```
-
-Alternatively you can use the CommonJS syntax:
-
-```javascript
-// Code enclosed in an asynchronous IIFE
-// as await is needed to import ES modules into CommonJS
-(async () =>
+```js
 {
-    const emojiMix = await import("emoji-mixer");
-
-    const {
-        toUnicode,
-        getEmojiCombo,
-        checkSupported,
-        googleRequestUrl,
-        googleRequestUrlEmojiPart,
-        getExpandedEmojiCompatibilityData,
-    } = emojiMix;
-
-    console.log(emojiMix.default("🔥", "😃"));
-})();
+    "$d": [20201001, 20260128],   // unique dates
+    "$e": [9749, 9800],           // unique emojis: codepoints as integers, sequences as strings
+    "2615": [[0, 0], [1, 1]],     // [emojiIndex, dateIndex]
+    "2648": [[-1, 1]]
+}
 ```
+
+A negative `emojiIndex` (`~i`) means the key emoji is the right-hand emoji in Google's URL. Above, both entries `[1, 1]` and `[-1, 1]` describe ☕ (left) + ♈ (right).
 
 ## Attributions
 
