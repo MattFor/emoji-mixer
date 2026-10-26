@@ -17,9 +17,14 @@ jobs:
             - uses: actions/setup-node@v7
               with:
                   node-version: 24
+            - uses: actions/setup-python@v7
+              with:
+                  python-version: '3.14'
             - run: npm ci
             - run: node converter.ts
             - run: npm test
+            - run: pip install . && python -m unittest discover -s bindings/python/tests
+            - run: cargo test
             - uses: peter-evans/create-pull-request@v8
               with:
                   branch: refresh-data

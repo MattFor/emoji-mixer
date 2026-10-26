@@ -5,12 +5,12 @@
     "type": "module",
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
+            "types": "./dist/bindings/node/index.d.ts",
+            "default": "./dist/bindings/node/index.js"
         }
     },
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
+    "main": "./dist/bindings/node/index.js",
+    "types": "./dist/bindings/node/index.d.ts",
     "files": [
         "dist"
     ],
@@ -20,7 +20,8 @@
     "scripts": {
         "build": "tsc",
         "test": "tsc && node --test",
-        "prepublishOnly": "tsc"
+        "prepublishOnly": "tsc",
+        "version": "sed -i -E 's/^version = \".*\"/version = \"'$npm_package_version'\"/' pyproject.toml Cargo.toml && git add pyproject.toml Cargo.toml"
     },
     "devDependencies": {
         "typescript": "^7.0.2"

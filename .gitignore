@@ -2,3 +2,6 @@ dist
 .idea
 qodana.yaml
 node_modules
+target
+Cargo.lock
+__pycache__

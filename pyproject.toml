@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "emoji-mixer"
+version = "2.0.0"
+description = "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "MattFor" }]
+keywords = ["emoji", "mix", "mixing", "combination", "google", "kitchen"]
+
+[project.urls]
+Homepage = "https://github.com/MattFor/emoji-mixer"
+Issues = "https://github.com/MattFor/emoji-mixer/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["bindings/python/emoji_mixer"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"compatibility.json" = "emoji_mixer/compatibility.json"

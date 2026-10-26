@@ -10,7 +10,7 @@ import getEmojiMixUrl, {
     googleRequestUrlEmojiPart,
     supportedEmojis,
     toUnicode
-} from '../dist/index.js';
+} from '../../dist/bindings/node/index.js';
 
 const url = (date, left, right) => `${baseUrl}/${date}/${left}/${left}_${right}.png`;
 const fromKey = (key) => String.fromCodePoint(...key.split('-').map((part) => parseInt(part, 16)));
@@ -24,7 +24,7 @@ test("getEmojiMixUrl uses Google's emoji order whichever way it is called", () =
 
 test('require() loads the package', () => {
     assert.equal(
-        createRequire(import.meta.url)('../dist/index.js').default('♈', '☕'),
+        createRequire(import.meta.url)('../../dist/bindings/node/index.js').default('♈', '☕'),
         url(20260128, 'u2615', 'u2648')
     );
 });

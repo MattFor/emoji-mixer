@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - 22:00 26-10-2026
+
+### Added
+
+- Python and Rust package
+
 ## [2.0.0] - 20:30 CEST 26-10-2026
 
 ### Fixed

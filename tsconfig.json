@@ -8,5 +8,5 @@
         "resolveJsonModule": true,
         "strict": true
     },
-    "files": ["index.ts"]
+    "files": ["bindings/node/index.ts"]
 }

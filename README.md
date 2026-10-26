@@ -1,10 +1,10 @@
 # Installation
 
 ```sh
-npm install emoji-mixer
+npm install emoji-mixer   # JavaScript / TypeScript, Node.js 20.19+
+pip install emoji-mixer   # Python 3.10+
+cargo add emoji-mixer     # Rust
 ```
-
-Requires Node.js 20.19+.
 
 ## Emoji Mix URL Generator
 
@@ -16,6 +16,16 @@ import getEmojiMixUrl from 'emoji-mixer';
 
 getEmojiMixUrl('🔥', '😃');
 // https://www.gstatic.com/android/keyboard/emojikitchen/20201001/u1f603/u1f603_u1f525.png
+```
+
+```python
+from emoji_mixer import get_emoji_mix_url
+
+get_emoji_mix_url("🔥", "😃")
+```
+
+```rust
+emoji_mixer::get_emoji_mix_url("🔥", "😃"); // Some(url)
 ```
 
 Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1F600"`, `"2764-fe0f"`). The FE0F variation selector is optional.
@@ -42,6 +52,10 @@ Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1
 
 - `supportedEmojis`, `emojiCompatibilityData`, `baseUrl`  
   The supported codepoint keys, the compressed database and the image base URL.
+
+**Python** has the same API in snake_case (`get_emoji_mix_url`, `to_unicode`, …, `BASE_URL`). It returns `None` instead of `undefined`/`null`, `detailed_errors` raises `ValueError`, and combinations are `EmojiCombo(left_emoji, right_emoji, date)` named tuples.
+
+**Rust** has `get_emoji_mix_url`, `to_unicode`, `get_emoji_combo`, `check_supported`, `google_request_url`, `google_request_url_emoji_part`, `supported_emojis()` and `BASE_URL`, returning `Option`s.
 
 ## Data format
 

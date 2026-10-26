@@ -1,0 +1,21 @@
+[package]
+name = "emoji-mixer"
+version = "2.0.0"
+edition = "2024"
+description = "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)"
+license = "MIT"
+repository = "https://github.com/MattFor/emoji-mixer"
+readme = "README.md"
+keywords = ["emoji", "mix", "combination", "google", "kitchen"]
+include = [
+  "/bindings/rust/lib.rs",
+  "/compatibility.json",
+  "/README.md",
+  "/LICENSE",
+]
+
+[lib]
+path = "bindings/rust/lib.rs"
+
+[dependencies]
+serde_json = "1"

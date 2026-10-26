@@ -1,4 +1,4 @@
-import data from './compatibility.json' with { type: 'json' };
+import data from '../../compatibility.json' with { type: 'json' };
 
 export type CompressedEmojiEntry = [number, number];
 
