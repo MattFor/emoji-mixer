@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [2.2.0] - 08:07 CEST 30-10-2026
 
 ### Added
 
@@ -153,6 +153,7 @@ Emoji compatibility is now accessed purely by compressed lookup tables internall
 
 - Initial commit.
 
+[2.2.0]: https://github.com/MattFor/emoji-mixer/releases/tag/v2.2.0
 [2.1.0]: https://github.com/MattFor/emoji-mixer/releases/tag/v2.1.0
 [2.0.0]: https://github.com/MattFor/emoji-mixer/releases/tag/v2.0.0
 [1.3.1]: https://github.com/MattFor/emoji-mixer/releases/tag/v1.3.1
