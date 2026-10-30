@@ -5,3 +5,10 @@ node_modules
 target
 Cargo.lock
 __pycache__
+
+# PHP, Ruby, .NET
+/vendor/
+*.gem
+bin/
+obj/
+/nupkg/

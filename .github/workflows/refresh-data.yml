@@ -1,32 +1,67 @@
 name: Refresh data
 
 on:
-    schedule:
-        - cron: '0 6 * * 1'
-    workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
 
 permissions:
-    contents: write
-    pull-requests: write
+  contents: write
+  pull-requests: write
 
 jobs:
-    refresh:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v7
-            - uses: actions/setup-node@v7
-              with:
-                  node-version: 24
-            - uses: actions/setup-python@v7
-              with:
-                  python-version: '3.14'
-            - run: npm ci
-            - run: node converter.ts
-            - run: npm test
-            - run: pip install . && python -m unittest discover -s bindings/python/tests
-            - run: cargo test
-            - uses: peter-evans/create-pull-request@v8
-              with:
-                  branch: refresh-data
-                  title: Refresh Emoji Kitchen data
-                  commit-message: Refresh Emoji Kitchen data
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.27'
+          cache: false
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.8
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: composer
+          coverage: none
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - name: Install
+        run: npm ci
+      - name: Convert the latest data
+        run: node converter.ts
+      - name: Node tests
+        run: npm test
+      - name: Python tests
+        run: pip install . && python -m unittest discover -s bindings/python/tests
+      - name: Rust tests
+        run: cargo test
+      - name: Go tests
+        run: go test ./...
+      - name: Deno tests
+        run: deno test --allow-env --allow-read bindings/node/index.test.mjs
+        env:
+          EMOJI_MIXER_ENTRY: ./index.ts
+      - name: PHP tests
+        run: composer dump-autoload && php bindings/php/tests/EmojiMixerTest.php
+      - name: Ruby tests
+        run: ruby -Ibindings/ruby/lib bindings/ruby/test/test_emoji_mixer.rb
+      - name: .NET tests
+        run: dotnet run --project bindings/dotnet/EmojiMixer.Tests -c Release
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: refresh-data
+          title: Refresh Emoji Kitchen data
+          commit-message: Refresh Emoji Kitchen data

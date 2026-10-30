@@ -9,15 +9,29 @@ description = "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emo
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
-authors = [{ name = "MattFor" }]
+authors = [{ name = "MattFor", email = "mattfor@relaxy.xyz" }]
 keywords = ["emoji", "mix", "mixing", "combination", "google", "kitchen"]
 
 [project.urls]
 Homepage = "https://github.com/MattFor/emoji-mixer"
 Issues = "https://github.com/MattFor/emoji-mixer/issues"
 
+[tool.hatch.build.targets.sdist]
+include = ["/bindings/python", "/compatibility.json", "/README.md", "/LICENSE"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["bindings/python/emoji_mixer"]
 
 [tool.hatch.build.targets.wheel.force-include]
 "compatibility.json" = "emoji_mixer/compatibility.json"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+indent-style = "tab"
+quote-style = "preserve"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B", "C4", "PIE", "SIM", "UP", "ARG", "PLE", "PLW", "FURB", "RUF"]

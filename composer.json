@@ -1,0 +1,28 @@
+{
+  "name": "mattfor/emoji-mixer",
+  "description": "Get the URL of a Google Emoji Kitchen image for two emojis.",
+  "type": "library",
+  "keywords": [
+    "emoji",
+    "mix",
+    "combination",
+    "google",
+    "kitchen"
+  ],
+  "homepage": "https://github.com/MattFor/emoji-mixer",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "MattFor",
+      "email": "mattfor@relaxy.xyz"
+    }
+  ],
+  "require": {
+    "php": ">=8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "MattFor\\EmojiMixer\\": "bindings/php/src/"
+    }
+  }
+}

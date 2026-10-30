@@ -1,0 +1,27 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{c,cc,cpp,cxx,h,hh,hpp,hxx,py,pyi,rs,go}]
+indent_style = tab
+
+[{Makefile,*.mk}]
+indent_style = tab
+
+[*.{lua,json,jsonc,json5,yml,yaml,toml,md}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{rb,gemspec}]
+indent_size = 2
+
+[*.{csproj,slnx,props,targets}]
+indent_size = 2

@@ -1,47 +1,47 @@
 {
-    "name": "emoji-mixer",
-    "version": "2.1.0",
-    "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
-    "type": "module",
-    "exports": {
-        ".": {
-            "types": "./dist/bindings/node/index.d.ts",
-            "default": "./dist/bindings/node/index.js"
-        }
-    },
-    "main": "./dist/bindings/node/index.js",
-    "types": "./dist/bindings/node/index.d.ts",
-    "files": [
-        "dist"
-    ],
-    "engines": {
-        "node": ">=20.19"
-    },
-    "scripts": {
-        "build": "tsc",
-        "test": "tsc && node --test",
-        "prepublishOnly": "tsc",
-        "version": "sed -i -E 's/^version = \".*\"/version = \"'$npm_package_version'\"/' pyproject.toml Cargo.toml && git add pyproject.toml Cargo.toml"
-    },
-    "devDependencies": {
-        "typescript": "^7.0.2"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/MattFor/emoji-mixer.git"
-    },
-    "keywords": [
-        "emoji",
-        "mix",
-        "mixing",
-        "combination",
-        "google",
-        "kitchen"
-    ],
-    "author": "MattFor",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/MattFor/emoji-mixer/issues"
-    },
-    "homepage": "https://github.com/MattFor/emoji-mixer#readme"
+  "name": "emoji-mixer",
+  "version": "2.1.0",
+  "description": "Get a Google Emoji Kitchen mixed emoji .png link from 2 other emojis. (and some more)",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/bindings/node/index.d.ts",
+      "default": "./dist/bindings/node/index.js"
+    }
+  },
+  "main": "./dist/bindings/node/index.js",
+  "types": "./dist/bindings/node/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node --test",
+    "prepublishOnly": "tsc",
+    "version": "sed -i -E 's/^version = \".*\"/version = \"'$npm_package_version'\"/' pyproject.toml Cargo.toml && git add pyproject.toml Cargo.toml"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattFor/emoji-mixer.git"
+  },
+  "keywords": [
+    "emoji",
+    "mix",
+    "mixing",
+    "combination",
+    "google",
+    "kitchen"
+  ],
+  "author": "MattFor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MattFor/emoji-mixer/issues"
+  },
+  "homepage": "https://github.com/MattFor/emoji-mixer#readme"
 }

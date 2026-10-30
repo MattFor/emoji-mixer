@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EmojiMixer/EmojiMixer.csproj" />
+  <Project Path="EmojiMixer.Tests/EmojiMixer.Tests.csproj" />
+</Solution>

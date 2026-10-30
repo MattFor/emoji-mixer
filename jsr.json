@@ -1,0 +1,7 @@
+{
+  "name": "@mattfor/emoji-mixer",
+  "exports": "./bindings/node/index.ts",
+  "publish": {
+    "include": ["bindings/node/index.ts", "compatibility.json", "README.md", "LICENSE"]
+  }
+}

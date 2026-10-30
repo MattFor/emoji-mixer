@@ -1,14 +1,32 @@
-# Installation
+# Emoji Mixer
+
+[![CI](https://github.com/MattFor/emoji-mixer/actions/workflows/ci.yml/badge.svg)](https://github.com/MattFor/emoji-mixer/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/emoji-mixer)](https://www.npmjs.com/package/emoji-mixer)
+[![PyPI](https://img.shields.io/pypi/v/emoji-mixer)](https://pypi.org/project/emoji-mixer/)
+[![crates.io](https://img.shields.io/crates/v/emoji-mixer)](https://crates.io/crates/emoji-mixer)
+[![Go Reference](https://pkg.go.dev/badge/github.com/MattFor/emoji-mixer/v2.svg)](https://pkg.go.dev/github.com/MattFor/emoji-mixer/v2)
+[![JSR](https://jsr.io/badges/@mattfor/emoji-mixer)](https://jsr.io/@mattfor/emoji-mixer)
+[![Packagist](https://img.shields.io/packagist/v/mattfor/emoji-mixer)](https://packagist.org/packages/mattfor/emoji-mixer)
+[![Gem](https://img.shields.io/gem/v/emoji_mixer)](https://rubygems.org/gems/emoji_mixer)
+[![NuGet](https://img.shields.io/nuget/v/EmojiMixer)](https://www.nuget.org/packages/EmojiMixer)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Get the URL of a Google Emoji Kitchen image for two emojis.
+
+## Install
 
 ```sh
 npm install emoji-mixer   # JavaScript / TypeScript, Node.js 20.19+
 pip install emoji-mixer   # Python 3.10+
 cargo add emoji-mixer     # Rust
+go get github.com/MattFor/emoji-mixer/v2   # Go 1.21+
+deno add jsr:@mattfor/emoji-mixer   # Deno, or npx jsr add @mattfor/emoji-mixer
+composer require mattfor/emoji-mixer   # PHP 8.2+
+gem install emoji_mixer   # Ruby 3.3+
+dotnet add package EmojiMixer   # .NET 10+
 ```
 
-## Emoji Mix URL Generator
-
-Get the URL of a Google Emoji Kitchen image for two emojis.
+## Usage
 
 ```js
 import getEmojiMixUrl from 'emoji-mixer';
@@ -26,6 +44,30 @@ get_emoji_mix_url("🔥", "😃")
 
 ```rust
 emoji_mixer::get_emoji_mix_url("🔥", "😃"); // Some(url)
+```
+
+```go
+import emojimixer "github.com/MattFor/emoji-mixer/v2"
+
+url, err := emojimixer.EmojiMixURL("🔥", "😃")
+```
+
+```php
+use MattFor\EmojiMixer\EmojiMixer;
+
+EmojiMixer::getEmojiMixUrl('🔥', '😃');
+```
+
+```ruby
+require "emoji_mixer"
+
+EmojiMixer.emoji_mix_url("🔥", "😃")
+```
+
+```csharp
+using EmojiMixer;
+
+EmojiKitchen.GetEmojiMixUrl("🔥", "😃");
 ```
 
 Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1F600"`, `"2764-fe0f"`). The FE0F variation selector is optional.
@@ -57,6 +99,25 @@ Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1
 
 **Rust** has `get_emoji_mix_url`, `to_unicode`, `get_emoji_combo`, `check_supported`, `google_request_url`, `google_request_url_emoji_part`, `supported_emojis()` and `BASE_URL`, returning `Option`s.
 
+**Go** has `EmojiMixURL` (an `error` says why there is no URL), `ToUnicode`, `EmojiCombo`, `CheckSupported`,
+`ExpandedEmojiCompatibilityData`, `GoogleRequestURL`, `GoogleRequestURLEmojiPart`, `SupportedEmojis()` and `BaseURL`;
+lookups return `(value, ok)` and combinations are `Combo{LeftEmoji, RightEmoji, Date}`.
+
+**JSR** is the same TypeScript as the npm package.
+
+**PHP** has the same API as static methods of `MattFor\EmojiMixer\EmojiMixer` (`getEmojiMixUrl`, `toUnicode`, …,
+`BASE_URL`), returning `null`; `$detailedErrors` throws `InvalidArgumentException`, and combinations are `EmojiCombo`
+objects with `leftEmoji`, `rightEmoji` and `date`.
+
+**Ruby** has `EmojiMixer.emoji_mix_url(left, right, detailed_errors: false)`, `to_unicode`, `emoji_combo`,
+`check_supported`, `expanded_emoji_compatibility_data`, `google_request_url`, `google_request_url_emoji_part`,
+`supported_emojis` and `BASE_URL`, returning `nil`; `detailed_errors` raises `ArgumentError`, and combinations are
+`EmojiMixer::EmojiCombo` values.
+
+**C#** has the same API as static members of `EmojiMixer.EmojiKitchen` (`GetEmojiMixUrl`, `ToUnicode`, …,
+`SupportedEmojis`, `BaseUrl`), returning `null`; `detailedErrors` throws `ArgumentException`, and combinations are
+`EmojiCombo(LeftEmoji, RightEmoji, Date)` records.
+
 ## Data format
 
 `emojiCompatibilityData` is generated from [emojikitchen.dev](https://emojikitchen.dev/metadata.json) by `converter.ts`:
@@ -76,3 +137,7 @@ A negative `emojiIndex` (`~i`) means the key emoji is the right-hand emoji in Go
 
 - Created by MattFor | Discord tag: mattfor | [Github](https://github.com/MattFor)
 - Inspired by [emoji-kitchen](https://github.com/xsalazar/emoji-kitchen) [made by Xavier Salazar a.k.a [xsalazar](https://github.com/xsalazar)]
+
+## License
+
+MIT, see [LICENSE](LICENSE). By [MattFor](https://github.com/MattFor).

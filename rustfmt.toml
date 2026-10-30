@@ -1,0 +1,12 @@
+# From <codeStyleSettings language="Rust"> in the JetBrains Default scheme.
+hard_tabs = true          # indentOptions USE_TAB_CHARACTER = true
+tab_spaces = 4
+# NOT 999. RIGHT_MARGIN = 999 is "never reflow", and rustfmt has no way to say
+# that: at 999 nothing ever exceeds the margin, so a `vec![]` you wrote across
+# twelve lines comes back as one 300-column line. 120 is the width at which
+# rustfmt chops -- and when it chops it is one element per line with the
+# closing bracket dedented, which is the shape these lists are written in.
+max_width = 120
+newline_style = "Unix"
+reorder_imports = true
+use_field_init_shorthand = true

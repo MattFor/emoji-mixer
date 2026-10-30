@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import getEmojiMixUrl, {
+// EMOJI_MIXER_ENTRY=./index.ts runs these tests on the JSR source under Deno
+const entry = process.env.EMOJI_MIXER_ENTRY;
+const {
+    default: getEmojiMixUrl,
     baseUrl,
     checkSupported,
     emojiCompatibilityData,
@@ -10,7 +13,7 @@ import getEmojiMixUrl, {
     googleRequestUrlEmojiPart,
     supportedEmojis,
     toUnicode
-} from '../../dist/bindings/node/index.js';
+} = await import(entry ?? '../../dist/bindings/node/index.js');
 
 const url = (date, left, right) => `${baseUrl}/${date}/${left}/${left}_${right}.png`;
 const fromKey = (key) => String.fromCodePoint(...key.split('-').map((part) => parseInt(part, 16)));
@@ -22,7 +25,7 @@ test("getEmojiMixUrl uses Google's emoji order whichever way it is called", () =
     assert.equal(getEmojiMixUrl('2615', '2615'), url(20201001, 'u2615', 'u2615'));
 });
 
-test('require() loads the package', () => {
+test('require() loads the package', { skip: entry !== undefined }, () => {
     assert.equal(
         createRequire(import.meta.url)('../../dist/bindings/node/index.js').default('♈', '☕'),
         url(20260128, 'u2615', 'u2648')

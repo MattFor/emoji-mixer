@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- The version is set from the release tag: dotnet pack -p:Version=X.Y.Z -->
+    <PackageId>EmojiMixer</PackageId>
+    <Authors>MattFor</Authors>
+    <Description>Get the URL of a Google Emoji Kitchen image for two emojis.</Description>
+    <PackageTags>emoji;mix;combination;google;kitchen</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MattFor/emoji-mixer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MattFor/emoji-mixer</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="../../../compatibility.json" LogicalName="compatibility.json" />
+    <None Include="../../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+</Project>

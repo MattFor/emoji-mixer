@@ -19,7 +19,7 @@ export type ExpandedEmojiCompatibilityData = Record<string, EmojiCombo[]>;
 
 export const baseUrl = 'https://www.gstatic.com/android/keyboard/emojikitchen';
 export const emojiCompatibilityData = data as unknown as EmojiCompatibilityData;
-export const supportedEmojis = Object.keys(data)
+export const supportedEmojis: string[] = Object.keys(data)
     .filter((key) => !key.startsWith('$'))
     .sort();
 
@@ -75,13 +75,13 @@ export const getExpandedEmojiCompatibilityData = (useCache = false): ExpandedEmo
     return expanded;
 };
 
-export const googleRequestUrlEmojiPart = (emoji: string) =>
+export const googleRequestUrlEmojiPart = (emoji: string): string =>
     emoji
         .split('-')
         .map((part) => `u${part.toLowerCase()}`)
         .join('-');
 
-export const googleRequestUrl = ({ leftEmoji, rightEmoji, date }: EmojiCombo) => {
+export const googleRequestUrl = ({ leftEmoji, rightEmoji, date }: EmojiCombo): string => {
     const left = googleRequestUrlEmojiPart(leftEmoji);
     return `${baseUrl}/${date}/${left}/${left}_${googleRequestUrlEmojiPart(rightEmoji)}.png`;
 };

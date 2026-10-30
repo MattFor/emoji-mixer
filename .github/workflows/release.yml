@@ -1,0 +1,158 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    name: GitHub release
+    needs: ci
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the tag against the version
+        # The same files and patterns as the release script; a file without a version is skipped
+        run: |
+          v=${GITHUB_REF_NAME#v}
+          check() { [ -z "$2" ] || [ "$2" = "$v" ] || { echo "::error file=$1::$1 says $2, the tag says $v"; exit 1; }; }
+          [ ! -f pyproject.toml ] || check pyproject.toml "$(sed -n '/^\[project\]/,/^\[/ s/^version *= *"\(.*\)"/\1/p' pyproject.toml)"
+          [ ! -f Cargo.toml ] || check Cargo.toml "$(sed -n '/^\[package\]/,/^\[/ s/^version *= *"\(.*\)"/\1/p' Cargo.toml)"
+          [ ! -f package.json ] || check package.json "$(node -p 'require("./package.json").version ?? ""')"
+          [ ! -f CMakeLists.txt ] || check CMakeLists.txt "$(sed -Ezn 's/.*project\([^)]*VERSION[[:space:]]+([0-9][^[:space:])]*).*/\1/p' CMakeLists.txt | tr -d '\0')"
+
+      - name: Release notes from the changelog
+        run: |
+          awk -v v="## [${GITHUB_REF_NAME#v}]" 'index($0, v) == 1 {p = 1; next} /^## \[/ {p = 0} p' CHANGELOG.md > notes.md
+          grep -q '[^[:space:]]' notes.md || { echo "::error file=CHANGELOG.md::nothing under ## [${GITHUB_REF_NAME#v}]"; exit 1; }
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          body_path: notes.md
+          prerelease: ${{ contains(github.ref_name, '-') }}
+
+  pypi:
+    name: Publish to PyPI
+    needs: release
+    runs-on: ubuntu-24.04
+    environment:
+      name: pypi
+      url: https://pypi.org/p/emoji-mixer
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build
+        run: pipx run build
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  crates:
+    name: Publish to crates.io
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: rust-lang/crates-io-auth-action@v1
+        id: auth
+
+      - name: Publish
+        run: cargo publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
+
+  npm:
+    name: Publish to npm
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+
+      - name: Install
+        run: npm ci
+
+      - name: Publish
+        run: npm publish
+
+  jsr:
+    name: Publish to JSR
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.8
+
+      - name: Publish
+        run: deno publish --set-version "${GITHUB_REF_NAME#v}"
+
+  rubygems:
+    name: Publish to RubyGems
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+
+      - uses: rubygems/configure-rubygems-credentials@v2.1.0
+
+      - name: Publish
+        run: |
+          gem build emoji_mixer.gemspec
+          gem push emoji_mixer-*.gem
+
+  nuget:
+    name: Publish to NuGet
+    needs: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack
+        run: dotnet pack bindings/dotnet/EmojiMixer/EmojiMixer.csproj -c Release -p:Version="${GITHUB_REF_NAME#v}" -o nupkg
+
+      - uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish
+        run: dotnet nuget push nupkg/*.nupkg --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
