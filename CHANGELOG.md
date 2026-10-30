@@ -180,4 +180,3 @@ Emoji compatibility is now accessed purely by compressed lookup tables internall
 [1.0.2]: https://github.com/MattFor/emoji-mixer/releases/tag/v1.0.2
 [1.0.1]: https://github.com/MattFor/emoji-mixer/releases/tag/v1.0.1
 [1.0.0]: https://github.com/MattFor/emoji-mixer/releases/tag/v1.0.0
-
