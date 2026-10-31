@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- JSDoc for every exported TypeScript symbol.
+
 ## [2.2.0] - 08:07 CEST 30-10-2026
 
 ### Added
