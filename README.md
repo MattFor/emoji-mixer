@@ -72,7 +72,7 @@ EmojiKitchen.GetEmojiMixUrl("🔥", "😃");
 
 Emojis can be passed as characters (`"☕"`) or codepoint strings (`"2615"`, `"1F600"`, `"2764-fe0f"`). The FE0F variation selector is optional.
 
-## Functions
+### Functions
 
 - `getEmojiMixUrl(leftEmoji, rightEmoji, detailedErrors = false)` (default export)  
   Returns the image URL, or `undefined` if an emoji is unsupported or the pair has no mix. With `detailedErrors`, throws an error explaining why instead.
@@ -118,7 +118,7 @@ objects with `leftEmoji`, `rightEmoji` and `date`.
 `SupportedEmojis`, `BaseUrl`), returning `null`; `detailedErrors` throws `ArgumentException`, and combinations are
 `EmojiCombo(LeftEmoji, RightEmoji, Date)` records.
 
-## Data format
+### Data format
 
 `emojiCompatibilityData` is generated from [emojikitchen.dev](https://emojikitchen.dev/metadata.json) by `converter.ts`:
 
@@ -133,11 +133,11 @@ objects with `leftEmoji`, `rightEmoji` and `date`.
 
 A negative `emojiIndex` (`~i`) means the key emoji is the right-hand emoji in Google's URL. Above, both entries `[1, 1]` and `[-1, 1]` describe ☕ (left) + ♈ (right).
 
-## Attributions
-
-- Created by MattFor | Discord tag: mattfor | [Github](https://github.com/MattFor)
-- Inspired by [emoji-kitchen](https://github.com/xsalazar/emoji-kitchen) [made by Xavier Salazar a.k.a [xsalazar](https://github.com/xsalazar)]
-
 ## License
 
 MIT, see [LICENSE](LICENSE). By [MattFor](https://github.com/MattFor).
+
+### Attributions
+
+- Created by MattFor | Discord tag: mattfor | [Github](https://github.com/MattFor)
+- Inspired by [emoji-kitchen](https://github.com/xsalazar/emoji-kitchen) [made by Xavier Salazar a.k.a [xsalazar](https://github.com/xsalazar)]

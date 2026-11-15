@@ -147,15 +147,15 @@ Emoji compatibility is now accessed purely by compressed lookup tables internall
 - Added missing semicolons throughout the codebase to improve code quality and consistency.
 - [1.0.31] (Actually) Added helper functions to the CommonJS usage example.
 
-## [1.0.2] - 30-05-2023
+## [1.0.2] - 22:24 CEST 30-05-2023
 
 - Added the "Related" section and improved the example.
 
-## [1.0.1] - 30-05-2023
+## [1.0.1] - 21:51 CEST 30-05-2023
 
 - Fixed minor spelling issues.
 
-## [1.0.0] - 30-05-2023
+## [1.0.0] - 18:08 CEST 30-05-2023
 
 - Initial commit.
 
