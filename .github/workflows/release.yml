@@ -125,7 +125,7 @@ jobs:
         with:
           ruby-version: '4.0'
 
-      - uses: rubygems/configure-rubygems-credentials@v2.1.0
+      - uses: rubygems/configure-rubygems-credentials@v2.2.0
 
       - name: Publish
         run: |
